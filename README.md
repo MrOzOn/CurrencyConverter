@@ -26,6 +26,7 @@
 ## Используемый стек
 - MVVM
 - Kotlin Coroutines
+- Dagger2 and Hilt
 - Room
 - Retrofit
 
