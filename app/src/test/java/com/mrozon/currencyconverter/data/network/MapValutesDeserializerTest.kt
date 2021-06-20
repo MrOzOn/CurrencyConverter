@@ -6,7 +6,7 @@ import org.junit.Test
 
 class MapValutesDeserializerTest {
     @Test
-    fun `check correct json to POJO`() {
+    fun check_correct_json_to_POJO() {
         val json = """
             {
                 "Date": "2021-06-19T11:30:00+03:00",

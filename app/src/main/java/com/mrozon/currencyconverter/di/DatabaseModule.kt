@@ -22,7 +22,7 @@ class DatabaseModule {
 
     @Provides
     fun provideCurrencyDao(currencyDatabase: CurrencyDatabase): CurrencyDao {
-        return currencyDatabase.plantDao()
+        return currencyDatabase.currencyDao()
     }
 
 }

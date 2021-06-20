@@ -35,7 +35,7 @@ class CurrencyServiceTest {
     }
 
     @Test
-    fun `get currencies from real network request`()  = coroutinesTestRule.runBlockingTest {
+    fun get_currencies_from_real_network_request()  = coroutinesTestRule.runBlockingTest {
         val response = service.getCurrencies()
         Assert.assertEquals(response.valute?.size ?: 0, 34)
     }

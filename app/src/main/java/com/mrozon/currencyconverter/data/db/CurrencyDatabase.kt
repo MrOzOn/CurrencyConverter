@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 @Database(entities = [ValuteDb::class], version = 1, exportSchema = false)
 abstract class CurrencyDatabase : RoomDatabase() {
-    abstract fun plantDao(): CurrencyDao
+    abstract fun currencyDao(): CurrencyDao
 
     companion object {
         private const val DATABASE_NAME = "currencies.db"
