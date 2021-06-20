@@ -1,16 +1,21 @@
 package com.mrozon.currencyconverter.data.db
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import org.junit.runner.RunWith
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
-import org.junit.*
+import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 
-@RunWith(AndroidJUnit4::class)
+@RunWith(RobolectricTestRunner::class)
+@Config(sdk = [29])
 class CurrencyDaoTest {
     private lateinit var database: CurrencyDatabase
     private lateinit var dao: CurrencyDao
@@ -25,7 +30,9 @@ class CurrencyDaoTest {
     @Before
     fun createDb() = runBlocking {
         val context = InstrumentationRegistry.getInstrumentation().targetContext
-        database = Room.inMemoryDatabaseBuilder(context, CurrencyDatabase::class.java).build()
+        database = Room.inMemoryDatabaseBuilder(context, CurrencyDatabase::class.java)
+            .allowMainThreadQueries()
+            .build()
         dao = database.currencyDao()
         dao.insertAll(listOf(valute1, valute2, valute3))
     }
