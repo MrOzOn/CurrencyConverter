@@ -1,20 +1,10 @@
-package com.mrozon.currencyconverter
+package com.mrozon.currencyconverter.data.network
 
-import CurrenciesResponse
-import Valute
-import com.google.gson.*
-import com.mrozon.currencyconverter.data.network.MapValutesDeserializer
-import org.junit.Assert.assertEquals
+import com.google.gson.GsonBuilder
+import org.junit.Assert.*
 import org.junit.Test
-import java.lang.reflect.Type
 
-
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
-class ExampleUnitTest {
+class MapValutesDeserializerTest {
     @Test
     fun `check correct json to POJO`() {
         val json = """
@@ -339,5 +329,4 @@ class ExampleUnitTest {
         val response = gson.fromJson(json, CurrenciesResponse::class.java)
         assertEquals(response.valute?.size?:0, 34)
     }
-
 }
