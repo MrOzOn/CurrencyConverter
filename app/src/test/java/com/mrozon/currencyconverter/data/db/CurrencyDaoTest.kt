@@ -44,7 +44,7 @@ class CurrencyDaoTest {
 
     @Test
     fun get_all_valutes_from_db() = runBlocking {
-        val valutes = dao.getPlants().first()
+        val valutes = dao.getValutes().first()
         assertEquals(valutes.size,3)
     }
 
@@ -52,7 +52,7 @@ class CurrencyDaoTest {
     fun add_one_new_item() = runBlocking {
         val valute = ValuteDb("R01775", "CHF", "Швейцарский франк", 78.7071)
         dao.insertAll(listOf(valute))
-        val valutes = dao.getPlants().first()
+        val valutes = dao.getValutes().first()
         assertEquals(valutes.size,4)
     }
 
@@ -60,7 +60,7 @@ class CurrencyDaoTest {
     fun add_one_existing_item() = runBlocking {
         val valute = ValuteDb("R01100", "CHF", "Швейцарский франк", 78.7071)
         dao.insertAll(listOf(valute))
-        val valutes = dao.getPlants().first()
+        val valutes = dao.getValutes().first()
         assertEquals(valutes.size,3)
     }
 
