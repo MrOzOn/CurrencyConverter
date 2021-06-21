@@ -1,6 +1,7 @@
 package com.mrozon.currencyconverter.data.network
 
 import com.google.gson.annotations.SerializedName
+import com.mrozon.currencyconverter.data.db.ValuteDb
 
 data class CurrenciesResponse(
 
@@ -42,5 +43,12 @@ data class Valute(
 
 	@field:SerializedName("Name")
 	val name: String? = null
+)
+
+fun Valute.toValuteDb() = ValuteDb(
+	id = this.iD?:"",
+	charCode = this.charCode?:"",
+	name = this.name?:"",
+	value = (this.value?:0.0) / (this.nominal?:1)
 )
 

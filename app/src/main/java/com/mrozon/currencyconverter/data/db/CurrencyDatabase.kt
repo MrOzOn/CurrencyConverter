@@ -22,21 +22,6 @@ abstract class CurrencyDatabase : RoomDatabase() {
 
         private fun buildDatabase(context: Context): CurrencyDatabase {
             return Room.databaseBuilder(context, CurrencyDatabase::class.java, DATABASE_NAME)
-                .addCallback(
-                    object : RoomDatabase.Callback() {
-//                        override fun onOpen(db: SupportSQLiteDatabase) {
-//                            super.onOpen(db)
-//                        }
-//
-//                        override fun onCreate(db: SupportSQLiteDatabase) {
-//                            super.onCreate(db)
-//                            val request = OneTimeWorkRequestBuilder<SeedDatabaseWorker>()
-//                                .setInputData(workDataOf(KEY_FILENAME to PLANT_DATA_FILENAME))
-//                                .build()
-//                            WorkManager.getInstance(context).enqueue(request)
-//                        }
-                    }
-                )
                 .build()
         }
     }

@@ -9,5 +9,5 @@ data class ValuteDb(
     val id: String,
     val charCode: String,
     val name: String,
-    val value: Float
+    val value: Double
 )

@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 interface CurrencyDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(plants: List<ValuteDb>)
+    suspend fun insertAll(valutes: List<ValuteDb>)
 
     @Query("SELECT * FROM valutes")
     fun getPlants(): Flow<List<ValuteDb>>

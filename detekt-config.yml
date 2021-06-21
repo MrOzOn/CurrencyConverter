@@ -179,6 +179,7 @@ exceptions:
       - NumberFormatException
       - ParseException
       - MalformedURLException
+      - TooGenericException
     allowedExceptionNameRegex: '_|(ignore|expected).*'
   ThrowingExceptionFromFinally:
     active: false
@@ -413,7 +414,7 @@ naming:
     excludes: ['**/test/**', '**/androidTest/**', '**/commonTest/**', '**/jvmTest/**', '**/jsTest/**', '**/iosTest/**']
     variablePattern: '[a-z][A-Za-z0-9]*'
     privateVariablePattern: '(_)?[a-z][A-Za-z0-9]*'
-    excludeClassPattern: '$^'
+    excludeClassPattern: '$CoroutineContextDispatchers^'
     ignoreOverridden: true
 
 performance:
