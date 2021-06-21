@@ -23,9 +23,9 @@ class CurrencyDaoTest {
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    private val valute1 = ValuteDb("R01090B", "BYN", "Белорусский рубль", 28.7415f)
-    private val valute2 = ValuteDb("R01100", "BGN", "Болгарский лев", 44.0295f)
-    private val valute3 = ValuteDb("R01565", "PLN", "Польский злотый", 18.9354f)
+    private val valute1 = ValuteDb("R01090B", "BYN", "Белорусский рубль", 28.7415)
+    private val valute2 = ValuteDb("R01100", "BGN", "Болгарский лев", 44.0295)
+    private val valute3 = ValuteDb("R01565", "PLN", "Польский злотый", 18.9354)
 
     @Before
     fun createDb() = runBlocking {
@@ -50,7 +50,7 @@ class CurrencyDaoTest {
 
     @Test
     fun add_one_new_item() = runBlocking {
-        val valute = ValuteDb("R01775", "CHF", "Швейцарский франк", 78.7071f)
+        val valute = ValuteDb("R01775", "CHF", "Швейцарский франк", 78.7071)
         dao.insertAll(listOf(valute))
         val valutes = dao.getPlants().first()
         assertEquals(valutes.size,4)
@@ -58,7 +58,7 @@ class CurrencyDaoTest {
 
     @Test
     fun add_one_existing_item() = runBlocking {
-        val valute = ValuteDb("R01100", "CHF", "Швейцарский франк", 78.7071f)
+        val valute = ValuteDb("R01100", "CHF", "Швейцарский франк", 78.7071)
         dao.insertAll(listOf(valute))
         val valutes = dao.getPlants().first()
         assertEquals(valutes.size,3)
