@@ -13,5 +13,5 @@ interface CurrencyDao {
     suspend fun insertAll(valutes: List<ValuteDb>)
 
     @Query("SELECT * FROM valutes")
-    fun getPlants(): Flow<List<ValuteDb>>
+    fun getValutes(): Flow<List<ValuteDb>>
 }
