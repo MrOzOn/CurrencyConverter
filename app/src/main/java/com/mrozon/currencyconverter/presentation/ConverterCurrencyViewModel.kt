@@ -27,7 +27,7 @@ class ConverterCurrencyViewModel @Inject constructor(
         started = SharingStarted.Lazily,
         initialValue = emptyList())
     private val flowSelected = MutableStateFlow(rubCharCode)
-    private val flowInputValue = MutableStateFlow(1.0)
+    private val flowInputValue = MutableStateFlow("1")
 
     val state: Flow<List<CurrencyUI>> = combine(
         flowCurrencies,
@@ -40,17 +40,18 @@ class ConverterCurrencyViewModel @Inject constructor(
     private fun calculateCorrectExchange(
         currencies: List<Currency>,
         selected: String,
-        inputValue: Double
+        inputValue: String
     ): List<CurrencyUI> {
         val selectedCurrency = currencies.firstOrNull { it.charCode == selected } ?: return emptyList()
 
         val listCurrencyVH = mutableListOf<CurrencyUI>()
         currencies.forEach { currency ->
-            val total = useCase.convertCurrency(selectedCurrency, currency, inputValue)
+            val total = useCase.convertCurrency(selectedCurrency, currency, inputValue.toDouble())
+
             val currencyVH = CurrencyUI(
                 charCode = currency.charCode,
                 name = currency.name,
-                total = total,
+                total = if (currency.charCode == selected) inputValue else total.format(4),
                 selected = currency.charCode == selected
             )
             listCurrencyVH.add(currencyVH)
@@ -60,7 +61,7 @@ class ConverterCurrencyViewModel @Inject constructor(
 
     fun selectCurrency(charCode: String) {
         flowSelected.value = charCode
-        flowInputValue.value = 1.0
+        flowInputValue.value = "1"
     }
 
     fun input(text: String) {
@@ -68,18 +69,19 @@ class ConverterCurrencyViewModel @Inject constructor(
             delChar -> {
                 val v: String = flowInputValue.value.format(4)
                 if(v.length==1) {
-                    flowInputValue.value = 0.0
+                    flowInputValue.value = "0"
                 } else {
-                    flowInputValue.value = v.dropLast(1).toDouble()
+                    flowInputValue.value = v.dropLast(1)
                 }
             }
             comma -> {
-                val v: Double = flowInputValue.value
-                flowInputValue.value = (v.format(4)+text).toDouble()
+                val v = flowInputValue.value
+                if (!v.contains(comma))
+                    flowInputValue.value = v+text
             }
             else -> {
-                val v: Double = flowInputValue.value
-                flowInputValue.value = (v.format(4)+text).toDouble()
+                val v = flowInputValue.value
+                flowInputValue.value = if (v=="0") text else v+text
             }
         }
     }

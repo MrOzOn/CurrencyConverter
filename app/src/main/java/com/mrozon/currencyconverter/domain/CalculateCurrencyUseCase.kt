@@ -34,16 +34,7 @@ class CalculateCurrencyUseCase @Inject constructor(
         from: Currency,
         to: Currency,
         value: Double
-    ) =
-//        return if (to.charCode==rub.charCode) {
-//            //  переводим в рубли любую валюту
-//            value * from.value
-//        } else {
-//            //  переводим в другую валюту
-//            (from.value * value) / to.value
-//        }
-
-            from.value * value / to.value
+    ) =  from.value * value / to.value
 
 
 

@@ -9,11 +9,11 @@ fun TextView.showTotal(currencyUI: CurrencyUI) {
 //    text = currencyUI.total.format(4)
     if(currencyUI.selected) {
         setTextColor(Color.MAGENTA)
-        text = currencyUI.total.format(4)
+        text = currencyUI.total
     } else {
         setTextColor(Color.BLACK)
         text = currencyUI.total.format(4)
     }
 }
 
-fun Double.format(digits: Int) = "%.${digits}f".format(this).trimEnd('0')//.trim('.')
+fun Double.format(digits: Int) = "%.${digits}f".format(this).trimEnd('0').trim('.')
