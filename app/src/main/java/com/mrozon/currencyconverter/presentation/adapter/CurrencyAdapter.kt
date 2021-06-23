@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mrozon.currencyconverter.databinding.IemCurrencyBinding
+import com.mrozon.currencyconverter.databinding.ItemCurrencyBinding
 import com.mrozon.currencyconverter.presentation.model.CurrencyUI
 
 class CurrencyAdapter(
@@ -14,7 +14,7 @@ class CurrencyAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         CurrencyViewHolder(
-            IemCurrencyBinding.inflate(
+            ItemCurrencyBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -28,7 +28,7 @@ class CurrencyAdapter(
     }
 
     class CurrencyViewHolder(
-        private val binding: IemCurrencyBinding,
+        private val binding: ItemCurrencyBinding,
         private var click: ((CurrencyUI) -> Unit)
     ):  RecyclerView.ViewHolder(binding.root) {
 
