@@ -1,20 +1,14 @@
 package com.mrozon.currencyconverter.presentation
 
 import android.app.Application
-import android.content.res.Resources
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mrozon.currencyconverter.CoroutineContextDispatchers
 import com.mrozon.currencyconverter.R
-import com.mrozon.currencyconverter.data.repository.IUpdateValutesRepository
 import com.mrozon.currencyconverter.domain.ICalculateCurrencyUseCase
 import com.mrozon.currencyconverter.domain.model.Currency
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 @HiltViewModel

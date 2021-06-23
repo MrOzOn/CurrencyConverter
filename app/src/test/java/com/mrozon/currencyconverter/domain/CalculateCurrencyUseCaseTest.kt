@@ -1,28 +1,29 @@
 package com.mrozon.currencyconverter.domain
 
+import androidx.test.core.app.ApplicationProvider
 import com.mrozon.currencyconverter.CoroutineTestRule
 import com.mrozon.currencyconverter.data.db.CurrencyDao
 import com.mrozon.currencyconverter.data.db.ValuteDb
-import com.mrozon.currencyconverter.data.network.Valute
-import com.mrozon.currencyconverter.data.repository.UpdateValutesRepository
 import com.mrozon.currencyconverter.domain.dto.CurrencyMapper
 import com.mrozon.currencyconverter.domain.model.Currency
-import com.mrozon.currencyconverter.domain.model.CurrentCurrencies
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
-import org.junit.After
+import org.junit.Assert.assertEquals
 import org.junit.Before
-import org.junit.Test
-
-import org.junit.Assert.*
 import org.junit.Rule
+import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 
 @ExperimentalCoroutinesApi
+@RunWith(RobolectricTestRunner::class)
+@Config(sdk = [29])
 class CalculateCurrencyUseCaseTest {
 
     @get:Rule
@@ -38,7 +39,7 @@ class CalculateCurrencyUseCaseTest {
 
     @Before
     fun setUp() {
-        useCase = CalculateCurrencyUseCase(dao, CurrencyMapper())
+        useCase = CalculateCurrencyUseCase(dao, CurrencyMapper(), ApplicationProvider.getApplicationContext())
     }
 
     @Test
