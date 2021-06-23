@@ -16,4 +16,8 @@ class MyApp: Application() {
             Timber.plant(Timber.DebugTree())
         }
     }
+
+    companion object {
+        const val PRECISION = 4
+    }
 }

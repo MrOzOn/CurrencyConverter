@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mrozon.currencyconverter.databinding.IemCurrencyBinding
-import timber.log.Timber
+import com.mrozon.currencyconverter.presentation.model.CurrencyUI
 
 class CurrencyAdapter(
     private var click: ((CurrencyUI) -> Unit)
@@ -38,7 +38,6 @@ class CurrencyAdapter(
                 executePendingBindings()
             }
             binding.setClickListener {
-                Timber.d("Click!")
                 click(item)
             }
         }

@@ -9,7 +9,7 @@
             type="android.view.View.OnClickListener"/>
         <variable
             name="currencyUI"
-            type="com.mrozon.currencyconverter.presentation.CurrencyUI" />
+            type="com.mrozon.currencyconverter.presentation.model.CurrencyUI" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

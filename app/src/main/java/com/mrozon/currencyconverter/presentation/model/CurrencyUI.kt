@@ -1,4 +1,4 @@
-package com.mrozon.currencyconverter.presentation
+package com.mrozon.currencyconverter.presentation.model
 
 data class CurrencyUI (
     val charCode: String,
