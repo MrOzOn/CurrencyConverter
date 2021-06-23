@@ -8,6 +8,5 @@ interface ICalculateCurrencyUseCase {
     fun loadCurrencies(): Flow<List<Currency>>
     fun convertCurrency(from: Currency,
                         to: Currency,
-                        rub: Currency,
                         value: Double, ): Double
 }

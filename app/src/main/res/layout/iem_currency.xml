@@ -4,7 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener"/>
+        <variable
+            name="currencyUI"
+            type="com.mrozon.currencyconverter.presentation.CurrencyUI" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,6 +30,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:text="@{currencyUI.charCode}"
             tools:text="RUB" />
 
         <TextView
@@ -41,6 +47,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tvCharCode"
             app:layout_constraintTop_toTopOf="parent"
+            app:show_total="@{currencyUI}"
+            android:onClick="@{clickListener}"
             tools:text="10,3" />
 
         <TextView
@@ -53,6 +61,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvValue"
-            tools:text="Российский рубль" />
+            android:text="@{currencyUI.name}"
+            tools:text="Российский рубль"
+            tools:ignore="SmallSp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

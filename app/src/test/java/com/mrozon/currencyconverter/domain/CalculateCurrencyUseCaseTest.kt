@@ -98,14 +98,13 @@ class CalculateCurrencyUseCaseTest {
     }
 
     @Test
-    fun convertCurrency_change_rub()  {
-        val rub = Currency(charCode = "RUB", name = "Российский рубль", value = 1.0)
+    fun convertCurrency_change_rub2eur()  {
         val from = Currency(charCode = "RUB", name = "Российский рубль", value = 1.0)
-        val to = Currency(charCode = "RUB", name = "Российский рубль", value = 1.0)
+        val to = Currency(charCode = "EUR", name = "Евро", value = 85.9943)
 
-        val expected = 5.0
+        val expected = 0.01162
 
-        val actual = useCase.convertCurrency(from, to, rub, 5.0)
+        val actual = useCase.convertCurrency(from, to, 1.0)
         assertEquals(
             expected,
             actual,
@@ -115,13 +114,12 @@ class CalculateCurrencyUseCaseTest {
 
     @Test
     fun convertCurrency_change_eur2rub()  {
-        val rub = Currency(charCode = "RUB", name = "Российский рубль", value = 1.0)
         val from = Currency(charCode = "EUR", name = "Евро", value = 85.9943)
         val to = Currency(charCode = "RUB", name = "Российский рубль", value = 1.0)
 
         val expected = 429.9715
 
-        val actual = useCase.convertCurrency(from, to, rub, 5.0)
+        val actual = useCase.convertCurrency(from, to, 5.0)
         assertEquals(
             expected,
             actual,
@@ -131,13 +129,12 @@ class CalculateCurrencyUseCaseTest {
 
     @Test
     fun convertCurrency_change_eur2usd()  {
-        val rub = Currency(charCode = "RUB", name = "Российский рубль", value = 1.0)
         val from = Currency(charCode = "EUR", name = "Евро", value = 85.9943)
-        val to = Currency(charCode = "USD", name = "Доллар США", value = 72.2216)
+        val to = Currency(charCode = "USD", name = "Доллар США", value = 72.5048)
 
-        val expected = 1.1907
+        val expected = 5.9302
 
-        val actual = useCase.convertCurrency(from, to, rub, 1.0)
+        val actual = useCase.convertCurrency(from, to, 5.0)
         assertEquals(
             expected,
             actual,

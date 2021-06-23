@@ -19,6 +19,8 @@ class ConverterCurrencyViewModel @Inject constructor(
 ): ViewModel() {
 
     private val rubCharCode = application.getString(R.string.rub_char_code)
+    private val delChar = application.getString(R.string.buttonDel)
+    private val comma = application.getString(R.string.buttonComma)
 
     private val flowCurrencies = useCase.loadCurrencies().stateIn(
         viewModelScope,
@@ -27,7 +29,7 @@ class ConverterCurrencyViewModel @Inject constructor(
     private val flowSelected = MutableStateFlow(rubCharCode)
     private val flowInputValue = MutableStateFlow(1.0)
 
-    val state: Flow<List<CurrencyVH>> = combine(
+    val state: Flow<List<CurrencyUI>> = combine(
         flowCurrencies,
         flowSelected,
         flowInputValue
@@ -39,14 +41,13 @@ class ConverterCurrencyViewModel @Inject constructor(
         currencies: List<Currency>,
         selected: String,
         inputValue: Double
-    ): List<CurrencyVH> {
+    ): List<CurrencyUI> {
         val selectedCurrency = currencies.firstOrNull { it.charCode == selected } ?: return emptyList()
-        val rubCurrency = currencies.firstOrNull { it.charCode == rubCharCode } ?: return emptyList()
 
-        val listCurrencyVH = mutableListOf<CurrencyVH>()
+        val listCurrencyVH = mutableListOf<CurrencyUI>()
         currencies.forEach { currency ->
-            val total = useCase.convertCurrency(currency, selectedCurrency, rubCurrency, inputValue)
-            val currencyVH = CurrencyVH(
+            val total = useCase.convertCurrency(selectedCurrency, currency, inputValue)
+            val currencyVH = CurrencyUI(
                 charCode = currency.charCode,
                 name = currency.name,
                 total = total,
@@ -57,13 +58,30 @@ class ConverterCurrencyViewModel @Inject constructor(
         return listCurrencyVH.toList()
     }
 
-    data class CurrencyVH (
-        val charCode: String,
-        val name: String,
-        val total: Double,
-        val selected: Boolean,
-        )
+    fun selectCurrency(charCode: String) {
+        flowSelected.value = charCode
+        flowInputValue.value = 1.0
+    }
 
-
+    fun input(text: String) {
+        when (text) {
+            delChar -> {
+                val v: String = flowInputValue.value.format(4)
+                if(v.length==1) {
+                    flowInputValue.value = 0.0
+                } else {
+                    flowInputValue.value = v.dropLast(1).toDouble()
+                }
+            }
+            comma -> {
+                val v: Double = flowInputValue.value
+                flowInputValue.value = (v.format(4)+text).toDouble()
+            }
+            else -> {
+                val v: Double = flowInputValue.value
+                flowInputValue.value = (v.format(4)+text).toDouble()
+            }
+        }
+    }
 }
 

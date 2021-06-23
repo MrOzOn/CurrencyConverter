@@ -33,26 +33,18 @@ class CalculateCurrencyUseCase @Inject constructor(
     override fun convertCurrency(
         from: Currency,
         to: Currency,
-        rub: Currency,
         value: Double
-    ): Double {
-        if (to.charCode==rub.charCode) {
-            //  переводим в рубли любую валюту
-            return value * from.value
-        } else {
-            //  переводим в другую валюту
-            return when (from.charCode) {
-                to.charCode -> {
-                    value
-                }
-                rub.charCode -> {
-                    from.value * value
-                }
-                else -> {
-                    (from.value * value) / to.value
-                }
-            }
-        }
-    }
+    ) =
+//        return if (to.charCode==rub.charCode) {
+//            //  переводим в рубли любую валюту
+//            value * from.value
+//        } else {
+//            //  переводим в другую валюту
+//            (from.value * value) / to.value
+//        }
+
+            from.value * value / to.value
+
+
 
 }
