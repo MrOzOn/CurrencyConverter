@@ -12,4 +12,6 @@
     <string name="buttonComma">,</string>
     <string name="button0">0</string>
     <string name="buttonDel">Del</string>
+    <string name="rub_char_code">RUB</string>
+    <string name="rub_name">Российский рубль</string>
 </resources>

@@ -64,14 +64,12 @@ class CalculateCurrencyUseCaseTest {
         Mockito.`when`(dao.getValutes()).thenReturn(
             flowOf(listOf(valute1, valute2, valute3))
         )
-        val expected = CurrentCurrencies(
-            valutes= listOf(
-                Currency(charCode="RUB", name="Российский рубль", value=1.0, selected=true),
-                Currency(charCode="HKD", name="Гонконгских долларов", value=93.0223, selected=false),
-                Currency(charCode="HKS", name="Гонконгских долларов", value=93.0223, selected=false),
-                Currency(charCode="HKY", name="Гонконгских долларов", value=93.0223, selected=false)
-            ),
-            value=1.0)
+        val expected = listOf(
+                Currency(charCode="RUB", name="Российский рубль", value=1.0),
+                Currency(charCode="HKD", name="Гонконгских долларов", value=93.0223),
+                Currency(charCode="HKS", name="Гонконгских долларов", value=93.0223),
+                Currency(charCode="HKY", name="Гонконгских долларов", value=93.0223)
+            )
 
         val actual = useCase.loadCurrencies()
 
@@ -86,17 +84,63 @@ class CalculateCurrencyUseCaseTest {
         Mockito.`when`(dao.getValutes()).thenReturn(
             flowOf(listOf())
         )
-        val expected = CurrentCurrencies(
-            valutes= listOf(
-                Currency(charCode="RUB", name="Российский рубль", value=1.0, selected=true),
-            ),
-            value=1.0)
+        val expected = listOf(
+                Currency(charCode="RUB", name="Российский рубль", value=1.0),
+            )
 
         val actual = useCase.loadCurrencies()
 
         assertEquals(
             expected,
             actual.first()
+        )
+    }
+
+    @Test
+    fun convertCurrency_change_rub()  {
+        val rub = Currency(charCode = "RUB", name = "Российский рубль", value = 1.0)
+        val from = Currency(charCode = "RUB", name = "Российский рубль", value = 1.0)
+        val to = Currency(charCode = "RUB", name = "Российский рубль", value = 1.0)
+
+        val expected = 5.0
+
+        val actual = useCase.convertCurrency(from, to, rub, 5.0)
+        assertEquals(
+            expected,
+            actual,
+            0.0001
+        )
+    }
+
+    @Test
+    fun convertCurrency_change_eur2rub()  {
+        val rub = Currency(charCode = "RUB", name = "Российский рубль", value = 1.0)
+        val from = Currency(charCode = "EUR", name = "Евро", value = 85.9943)
+        val to = Currency(charCode = "RUB", name = "Российский рубль", value = 1.0)
+
+        val expected = 429.9715
+
+        val actual = useCase.convertCurrency(from, to, rub, 5.0)
+        assertEquals(
+            expected,
+            actual,
+            0.0001
+        )
+    }
+
+    @Test
+    fun convertCurrency_change_eur2usd()  {
+        val rub = Currency(charCode = "RUB", name = "Российский рубль", value = 1.0)
+        val from = Currency(charCode = "EUR", name = "Евро", value = 85.9943)
+        val to = Currency(charCode = "USD", name = "Доллар США", value = 72.2216)
+
+        val expected = 1.1907
+
+        val actual = useCase.convertCurrency(from, to, rub, 1.0)
+        assertEquals(
+            expected,
+            actual,
+            0.0001
         )
     }
 

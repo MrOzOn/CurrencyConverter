@@ -12,7 +12,6 @@ class CurrencyMapper @Inject constructor(): BaseMapper<ValuteDb, Currency>() {
     override fun map(entity: ValuteDb) = Currency(
         charCode = entity.charCode,
         name = entity.name,
-        value = entity.value,
-        selected = false
+        value = entity.value
     )
 }

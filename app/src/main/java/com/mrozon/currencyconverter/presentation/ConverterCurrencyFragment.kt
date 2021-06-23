@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.mrozon.currencyconverter.databinding.FragmentConverterCurrencyBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import timber.log.Timber
 
 @AndroidEntryPoint
 class ConverterCurrencyFragment: Fragment() {
@@ -20,6 +23,17 @@ class ConverterCurrencyFragment: Fragment() {
     ): View {
         val binding = FragmentConverterCurrencyBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.state.collect { listVH ->
+                Timber.d(listVH.toString())
+            }
+        }
+
     }
 
 }
