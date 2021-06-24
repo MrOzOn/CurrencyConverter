@@ -30,6 +30,7 @@
 - Dagger2 and Hilt
 - Room
 - Retrofit
+- DataBinding
 
 ## Дополнительные инструменты
 - статический анализатор кода [Detekt](https://github.com/detekt/detekt) (запуск проверки - команда `./gradlew detekt`)
